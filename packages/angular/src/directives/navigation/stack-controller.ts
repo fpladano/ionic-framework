@@ -67,8 +67,7 @@ export class StackController {
     const leavingView = this.activeView;
     const tabSwitch = isTabSwitch(enteringView, leavingView);
     if (tabSwitch) {
-      direction = 'back';
-      animation = undefined;
+      direction = animation = undefined;
     }
 
     const viewsSnapshot = this.views.slice();
@@ -140,7 +139,7 @@ export class StackController {
         // In case the enteringView is the same as the leavingPage we need to reattach()
         enteringView.ref.changeDetectorRef.reattach();
 
-        return this.transition(enteringView, leavingView, animation, this.canGoBack(1), false, animationBuilder)
+        return this.transition(enteringView, leavingView, direction, this.canGoBack(1), false, animationBuilder)
           .then(() => cleanupAsync(enteringView, views, viewsSnapshot, this.location, this.zone))
           .then(() => ({
             enteringView,
