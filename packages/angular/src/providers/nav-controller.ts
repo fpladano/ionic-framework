@@ -38,8 +38,7 @@ export class NavController {
       router.events.subscribe((ev) => {
         if (ev instanceof NavigationStart) {
           const id = ev.restoredState ? ev.restoredState.navigationId : ev.id;
-          this.guessDirection = id < this.lastNavId ? 'back' : 'forward';
-          this.guessAnimation = !ev.restoredState ? this.guessDirection : undefined;
+          this.guessAnimation = this.guessDirection = id < this.lastNavId ? 'back' : 'forward';
           this.lastNavId = this.guessDirection === 'forward' ? ev.id : id;
         }
       });
